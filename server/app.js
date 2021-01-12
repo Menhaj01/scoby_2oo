@@ -8,7 +8,16 @@ const logger = require("morgan");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
+const cors = require("cors");
+
 const app = express();
+
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true, // Allow origins to send cookies.
+  })
+);
 
 /*
  * Middlewares
@@ -36,9 +45,10 @@ app.use(
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
+const itemRouter = require("./routes/item");
 
 app.use("/", indexRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
-
+app.use("/api/items", itemRouter);
 module.exports = app;
