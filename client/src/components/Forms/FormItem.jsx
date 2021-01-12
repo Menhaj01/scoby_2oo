@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LocationAutoComplete from "../LocationAutoComplete";
 import "../../styles/form.css";
+import apiHandler from "../../api/apiHandler";
 
 class ItemForm extends Component {
   state = {
@@ -21,7 +22,8 @@ class ItemForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Wax On Wax Off");
+    
+    this.state({ [event.target.id]: event.target.value });
 
     // In order to send back the data to the client, since there is an input type file you have to send the
     // data as formdata.
