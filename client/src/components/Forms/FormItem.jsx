@@ -3,12 +3,21 @@ import LocationAutoComplete from "../LocationAutoComplete";
 import "../../styles/form.css";
 
 class ItemForm extends Component {
-  state = {};
+  state = {
+    name: "",
+    category: "",
+    quantity: "",
+    address: "",
+    description: "",
+    image: "",
+    submit: true,
+  };
 
-  handleChange(event) {
-    console.log("Wax On Wax Off");
-    this.setState({});
-  }
+  handleChange = (event) => {
+    console.log(event.target.value);
+    console.log(event.target.id);
+    this.setState({ [event.target.id]: event.target.value });
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -30,6 +39,7 @@ class ItemForm extends Component {
   };
 
   render() {
+    console.log("STATE :", this.state);
     return (
       <div className="ItemForm-container">
         <form className="form">
@@ -53,7 +63,11 @@ class ItemForm extends Component {
               Category
             </label>
 
-            <select id="category" defaultValue="-1">
+            <select
+              id="category"
+              defaultValue="-1"
+              onChange={this.handleChange}
+            >
               <option value="-1" disabled>
                 Select a category
               </option>
@@ -68,7 +82,12 @@ class ItemForm extends Component {
             <label className="label" htmlFor="quantity">
               Quantity
             </label>
-            <input className="input" id="quantity" type="number" />
+            <input
+              onChange={this.handleChange}
+              className="input"
+              id="quantity"
+              type="number"
+            />
           </div>
 
           <div className="form-group">
@@ -86,6 +105,7 @@ class ItemForm extends Component {
               id="description"
               className="text-area"
               placeholder="Tell us something about this item"
+              onChange={this.handleChange}
             ></textarea>
           </div>
 
@@ -93,7 +113,12 @@ class ItemForm extends Component {
             <label className="custom-upload label" htmlFor="image">
               Upload image
             </label>
-            <input className="input" id="image" type="file" />
+            <input
+              onChange={this.handleChange}
+              className="input"
+              id="image"
+              type="file"
+            />
           </div>
 
           <h2>Contact information</h2>
